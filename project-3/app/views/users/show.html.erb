@@ -1,0 +1,9 @@
+<h1>Welcome to user <%= @user.username %>'s profile</h1>
+
+<p>Email: <%= @user.email %></p>
+
+<%= link_to "Edit User", edit_user_path(@user), class: "edit_user_button" %>
+
+<%= link_to "Delete User", user_path(@user), data: {
+    turbo_method: :delete,
+    turbo_confirm: "Are you sure?"}, class: "delete_user_button" %>

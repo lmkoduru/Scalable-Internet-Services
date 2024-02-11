@@ -1,0 +1,51 @@
+<h1>Users</h1>
+<%= link_to "New User", new_user_path, class: "new_user_button" %>
+
+
+<ul>
+<% @users.each do |user| %>
+  <li>
+    <div>
+      Username: <%= link_to user.username, user %>
+      <%= link_to new_user_post_path(user) do %>
+        <%= image_tag(asset_path("new_post_icon.png"), alt: "New Post", class: "comment_icon") %>
+      <% end %>
+    </div>
+    <ul>
+      <% user.posts.each do |post| %>
+        <li>
+          Post Title: <%= post.title %>
+          <%= link_to edit_user_post_path(post.user, post) do %>
+            <%= image_tag(asset_path("edit_comment_icon.png"), alt: "Edit Post", class: "comment_icon") %>
+          <% end %>
+          <%= link_to user_post_path(post.user, post), method: :delete, data: { turbo_method: :delete } do %>
+            <%= image_tag(asset_path("delete_comment_icon.png"), alt: "Delete Post", class: "comment_icon") %>
+          <% end %>
+        
+          <p>Post Body: <%= post.body %></p>
+          <%= link_to new_post_comment_path(post) do %>
+            <%= image_tag(asset_path("comment_icon.png"), alt: "Add Comment", class: "comment_icon") %>
+          <% end %>
+
+          <!-- Unordered list of comments -->
+          <ul>
+            <% post.comments.each do |comment| %>
+              <li>
+              <%= comment.commenter %> comments <%= comment.body %>
+              <%= link_to edit_post_comment_path(post, comment) do %>
+                <%= image_tag(asset_path("edit_comment_icon.png"), alt: "Edit Comment", class: "comment_icon") %>
+              <% end %>
+              <%= link_to post_comment_path(post, comment), method: :delete, data: { turbo_method: :delete } do %>
+                <%= image_tag(asset_path("delete_comment_icon.png"), alt: "Delete Comment", class: "comment_icon") %>
+              <% end %>
+              </li>
+            <% end %>
+          </ul>
+
+        </li>
+      <% end %>
+    </ul>
+
+  </li>
+<% end %>
+</ul>
