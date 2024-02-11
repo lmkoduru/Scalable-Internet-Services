@@ -1,0 +1,27 @@
+{
+	"name": "dlx",
+	"version": "0.2.1",
+	"author": "Johannes Laire <johannes@laire.fi>",
+	"description": "Knuth's Dancing Links algorithm for the exact cover problem",
+	"license": "MIT",
+	"homepage": "https://github.com/jlaire/dlx.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jlaire/dlx.js"
+	},
+	"keywords": [
+		"dancing links",
+		"dlx",
+		"exact cover",
+		"algorithm"
+	],
+	"dependencies": {
+		"underscore": "*"
+	},
+	"devDependencies": {
+		"jasmine-node": "*"
+	},
+	"scripts": {
+		"test": "jasmine-node spec"
+	}
+}

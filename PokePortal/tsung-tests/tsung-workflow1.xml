@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "tsung-1.0.dtd" []>
+<tsung loglevel="notice" version="1.0">
+  <clients>
+    <!-- Specify the Tsung controller settings -->
+    <client host="localhost" use_controller_vm="true" maxusers="10000">
+    </client>
+  </clients>
+
+  <servers>
+    <server host="localhost" port="3000" type="tcp"></server>
+  </servers>
+
+  <load>
+    <arrivalphase phase="1" duration="10" unit="minute">
+      <users arrivalrate="10" unit="second"></users>
+    </arrivalphase>
+    <arrivalphase phase="2" duration="5" unit="minute">
+      <users arrivalrate="20" unit="second"></users>
+    </arrivalphase>
+  </load>
+
+  <options>
+    <!-- Set connection timeout to 3 seconds -->
+    <option name="global_ack_timeout" value="3000"></option>
+  </options>
+  
+  <sessions>
+    <!-- Session: http-example -->
+    <session name="http-example" probability="100" type="ts_http">
+      
+      <!-- Request 1: GET request to the root URL -->
+      <request>
+        <http url="/" method="GET" version="1.1"></http>
+      </request>
+
+      <!-- Request 2: POST request to create a new user -->
+      <request>
+        <http url="/users" method="POST" version="1.1"></http>
+      </request>
+
+      <!-- Request 3: POST request to create a new battle -->
+      <request>
+        <http url="/battles" method="POST" version="1.1"></http>
+      </request>
+
+      <!-- Request 4: DELETE request to delete a battle (with battle id) -->
+      <request>
+        <http url="/battles/{battle_id}" method="DELETE" version="1.1"></http>
+      </request>
+
+      <!-- Request 5: DELETE request to delete a user (with user_id) -->
+      <request>
+        <http url="/users/{user_id}" method="DELETE" version="1.1"></http>
+      </request>
+    </session>
+  </sessions>
+</tsung>
